@@ -335,10 +335,10 @@ class pattern:
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
 
-            testo_temp = self.rettangolo(x-((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArrx, y+(size_readery/2)+dimArry, dose, 63, size_readerx, size_readery)
+            testo_temp = self.rettangolo(x+((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArrx, y-(size_readery/2)+dimArry, dose, 61, size_readerx, size_readery)
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
-            testo_temp = self.rettangolo(x-(size_readery/2)+dimArrx, y+((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArry, dose, 63, size_readery, size_readerx)
+            testo_temp = self.rettangolo(x-(size_readery/2)+dimArrx, y+((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArry, dose, 61, size_readery, size_readerx)
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
             return testoi

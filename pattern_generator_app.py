@@ -138,6 +138,12 @@ if st.button('Create'):
                             elips_sep, elips_rotatio, elips_vertex, gap_len_min, gap_len_max, gap_len_step, y_size, x_size, distance_between_gat,
                             base_triangle, distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating, feature_check, marker_type)
 
+    pgf().preview_generator(sample, num_elements_x, num_elements_y, raggio_iniziale, raggio_finale, step_size, distanza_tra_cerchi, dimArr, distanza_dosi_x,
+                            distanza_dosi_y, layer, step_dose, dose_base, width, vertici, rotazione, altezza, base, lato_cost, text_label, bowtie_pitch_x,
+                            bowtie_pitch_y, pitch_choice_text, dose_marker, starting_high, ending_high, high_step, angle, feature_check)
+    st.pyplot()
+    st.write('Red line represents the writing fields')
+
     pattern = pd.DataFrame(np.array(pattern).reshape(-1,1))
     pattern.columns = [' ']
     download_file(pattern, name_pattern)
@@ -152,9 +158,3 @@ if st.button('Create'):
     markers = pd.concat([markers,testo_dosi])
     markers.columns = [' ']
     download_file(markers, name_markers)
-
-    pgf().preview_generator(sample, num_elements_x, num_elements_y, raggio_iniziale, raggio_finale, step_size, distanza_tra_cerchi, dimArr, distanza_dosi_x,
-                            distanza_dosi_y, layer, step_dose, dose_base, width, vertici, rotazione, altezza, base, lato_cost, text_label, bowtie_pitch_x,
-                            bowtie_pitch_y, pitch_choice_text, dose_marker, starting_high, ending_high, high_step, angle, feature_check)
-    st.pyplot()
-    st.write('Red line represents the writing fields')
