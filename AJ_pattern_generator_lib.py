@@ -314,7 +314,12 @@ class pattern:
         return testoi
 
     def marker_cross(self, x, y, dose, layer, dimArr, sizex1 = 1, sizey1 = 3, sizex2 = 0.1, sizey2 = 4, size_readerx = 0.5, size_readery = 6):
+
+        cross_dimension = sizey1 + sizey1 + sizey2
+        dimArr = dimArr + cross_dimension
+
         def single_cross(testoi, dimArrx, dimArry):
+            # large reptangle
             testo_temp = self.rettangolo(x-(sizex1/2)+dimArrx, y-((sizey2/2)+sizey1)+dimArry, dose, layer, sizex1, sizey1)
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
@@ -328,6 +333,7 @@ class pattern:
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
 
+            # thin reptangle
             testo_temp = self.rettangolo(x-(sizex2/2)+dimArrx, y-(sizey2/2)+dimArry, dose, layer, sizex2, sizey2)
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
@@ -335,6 +341,7 @@ class pattern:
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
 
+            # autoalignment
             testo_temp = self.rettangolo(x+((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArrx, y-(size_readery/2)+dimArry, dose, 61, size_readerx, size_readery)
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
@@ -344,10 +351,10 @@ class pattern:
             return testoi
 
         testoi = []
-        testoi = single_cross(testoi, 0, 0)
-        testoi = single_cross(testoi, 0, dimArr)
-        testoi = single_cross(testoi, dimArr, 0)
-        testoi = single_cross(testoi, dimArr, dimArr)
+        testoi = single_cross(testoi, 0-(cross_dimension/2), 0-(cross_dimension/2))
+        testoi = single_cross(testoi, 0-(cross_dimension/2), dimArr-(cross_dimension/2))
+        testoi = single_cross(testoi, dimArr-(cross_dimension/2), 0-(cross_dimension/2))
+        testoi = single_cross(testoi, dimArr-(cross_dimension/2), dimArr-(cross_dimension/2))
 
         return testoi
 

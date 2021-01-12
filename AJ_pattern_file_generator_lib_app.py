@@ -1,7 +1,3 @@
-# import sys
-# # sys.path.insert(0, 'C:/Users/ajacassi/OneDrive/ponte/programmi/python/progetto2/AJ_lib')
-# sys.path.insert(0, 'C:/Users/ajacassi/OneDrive/ponte/programmi/python/progetto2/EBL_stand_alone')
-
 import numpy as np
 from AJ_pattern_generator_lib import pattern
 from AJ_draw import disegna as ds
@@ -159,8 +155,6 @@ class pattern_generator_files:
                     testo_cerchi.append(pattern().generatore_testo(x[i]+(dimArr/2) + k*distanza_tra_cerchi, y[j]+dimArr+30, dose_marker, str(layer)+'2', testo[k]))
                     dose_i = dose_i + 1
 
-
-
                     # ██     ██  █████  ██    ██ ███████  ██████  ██    ██ ██ ██████  ███████
                     # ██     ██ ██   ██ ██    ██ ██      ██       ██    ██ ██ ██   ██ ██
                     # ██  █  ██ ███████ ██    ██ █████   ██   ███ ██    ██ ██ ██   ██ █████
@@ -178,9 +172,6 @@ class pattern_generator_files:
                                               distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating))
 
                     dose_i = dose_i + 1
-
-#markers with cross
-# markers.append(pattern().marker_cross(x[i] + k*distanza_tra_cerchi, y[j], dose_marker, str(layer)+'1', dimArr))
 
 # ███    ███ ██    ██ ██   ████████ ██     ██████  ██ ████████  ██████ ██   ██     ██████   ██████  ██     ██ ████████ ██ ███████
 # ████  ████ ██    ██ ██      ██    ██     ██   ██ ██    ██    ██      ██   ██     ██   ██ ██    ██ ██     ██    ██    ██ ██
