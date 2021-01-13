@@ -153,6 +153,25 @@ class pattern:
         return testoi
 
 
+        # ██████   █████  ████████ ██   ██
+        # ██   ██ ██   ██    ██    ██   ██
+        # ██████  ███████    ██    ███████
+        # ██      ██   ██    ██    ██   ██
+        # ██      ██   ██    ██    ██   ██
+
+    def automatic_marker(self, x, y, dose, layer, lenght, width, distance):
+        dose = dose*100
+        testoi = ['' for i in range(8)]
+        testoi[0] = 'L ' + str(dose) + ' ' + str(layer)+ ' ' + str(width)
+        testoi[1] = str(x-(lenght/2)) + ' ' + str(y+distance)
+        testoi[2] = str(x+(lenght/2)) + ' ' + str(y+distance)
+        testoi[3] = '#'
+        testoi[4] = 'L ' + str(dose) + ' ' + str(layer)+ ' ' + str(width)
+        testoi[5] = str(x+distance) + ' ' + str(y-(lenght/2))
+        testoi[6] = str(x+distance) + ' ' + str(y+(lenght/2))
+        testoi[7] = '#'
+        return testoi
+
         # ██     ██  █████  ██    ██ ███████  ██████  ██    ██ ██ ██████  ███████
         # ██     ██ ██   ██ ██    ██ ██      ██       ██    ██ ██ ██   ██ ██
         # ██  █  ██ ███████ ██    ██ █████   ██   ███ ██    ██ ██ ██   ██ █████
@@ -342,12 +361,10 @@ class pattern:
                 testoi.append(testo_temp[i])
 
             # autoalignment
-            testo_temp = self.rettangolo(x+((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArrx, y-(size_readery/2)+dimArry, dose, 61, size_readerx, size_readery)
+            testo_temp = self.automatic_marker(x+dimArrx, y+dimArry, dose, 61, 6, 0.5, 3.5)
             for i in range(len(testo_temp)):
                 testoi.append(testo_temp[i])
-            testo_temp = self.rettangolo(x-(size_readery/2)+dimArrx, y+((sizey2/2)+(sizey1/2)-(size_readerx/2))+dimArry, dose, 61, size_readery, size_readerx)
-            for i in range(len(testo_temp)):
-                testoi.append(testo_temp[i])
+
             return testoi
 
         testoi = []
@@ -355,6 +372,12 @@ class pattern:
         testoi = single_cross(testoi, 0-(cross_dimension/2), dimArr-(cross_dimension/2))
         testoi = single_cross(testoi, dimArr-(cross_dimension/2), 0-(cross_dimension/2))
         testoi = single_cross(testoi, dimArr-(cross_dimension/2), dimArr-(cross_dimension/2))
+
+        # testoi = single_cross(testoi, 0, 0)
+        # testoi = single_cross(testoi, 0, dimArr)
+        # testoi = single_cross(testoi, dimArr, 0)
+        # testoi = single_cross(testoi, dimArr, dimArr)
+
 
         return testoi
 
