@@ -480,26 +480,26 @@ class pattern:
 
 
 
-    def sandro(self, x, y, dose, layer):
+    def sandro(self, x, y, dose, layer, aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2):
 
         def funzione(x):
-            aa = 0.9
-            bb = 1.4
-            cc = 1.4
-            gg = 1.1
-            dd = 1.5
+            aa = aa1
+            bb = bb1
+            cc = cc1
+            gg = gg1
+            dd = dd1
 
             uno = (np.abs(np.sin(x)/cc)**dd + gg)**2
             due = (x/bb)**2
             return np.sqrt((aa**2)*(uno - due*uno))
 
         def funzione2(x):
-            aa = 1.3
-            bb = 0.8
-            cc = 1.1
-            gg = 0.01
-            dd = 1.2
-            multi = 1
+            aa = aa2
+            bb = bb2
+            cc = cc2
+            gg = gg2
+            dd = dd2
+            multi = mm2
 
             uno = (np.abs(np.sin(x)/cc)**dd + gg/multi)**2
             due = (x/bb)**2
@@ -556,7 +556,7 @@ class pattern:
         testoi3[5] = str(coorXnew[0]+x) + ' ' + str(-coordYnew[0]+y)
         testoi3[6] = str(coorXnew[0]+x) + ' ' + str(coordYnew[0]+y)
 
-        testoi4 = ['' for i in range(7)]
+        testoi4 = ['' for i in range(8)]
         testoi4[0] = '#'
         testoi4[1] = '1 ' + str(dose) + ' ' + str(layer)
         testoi4[2] = str(coorXnew[-1]+x) + ' ' + str(coordYnew[-1]+y)
@@ -564,6 +564,8 @@ class pattern:
         testoi4[4] = str(coordXnew2[-1]+x) + ' ' + str(-coordYnew2[-1]+y)
         testoi4[5] = str(coorXnew[-1]+x) + ' ' + str(-coordYnew[-1]+y)
         testoi4[6] = str(coorXnew[-1]+x) + ' ' + str(coordYnew[-1]+y)
+        testoi4[7] = '#'
+
 
         test_tot = testoi+testoi2+testoi3+testoi4
 

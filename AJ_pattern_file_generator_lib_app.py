@@ -9,7 +9,8 @@ class pattern_generator_files:
                           pitch_choice_text, dose_marker, starting_high, ending_high, high_step, angle, angle2, elips_start_r,
                           elips_stop_r, elips_sep, elips_rotatio, elips_vertex, gap_len_min, gap_len_max, gap_len_step, y_size,
                           x_size, distance_between_gat, base_triangle, distance_grating, deg_grating, size_grating, pitch_grating,
-                          number_of_grating, vertici_grating, feature_check, marker_type):
+                          number_of_grating, vertici_grating, feature_check, marker_type,
+                          aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2):
 
         if feature_check == 'circle':
             namefile = 'AAA_cirlce_' + sample + '.asc'
@@ -296,7 +297,7 @@ class pattern_generator_files:
                 if feature_check == 'point':
                     punti.append(pattern().dot(x[i], y[j], dose[dose_i], layer))
                 if feature_check == 'sandro':
-                    sandro.append(pattern().sandro(x[i], y[j], dose[dose_i], layer))
+                    sandro.append(pattern().sandro(x[i], y[j], dose[dose_i], layer, aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2))
                     # print(dose[dose_i])
 
 

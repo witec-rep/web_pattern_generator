@@ -48,6 +48,7 @@ circle_check, bowtie_check, rectangle_check, point_check, bowtie_check_2, triang
 width, vertici, rotazione, lato_cost, altezza, base, elips_start_r, elips_rotatio, elips_vertex, elips_stop_r, elips_sep = 0, 100, 0, 0.1, 0.01, 0.03, 0.01, 0, 100, 0.1, 0.01
 pitch_choice_text, bowtie_pitch_x, bowtie_pitch_y, starting_high, ending_high, high_step, angle, angle2 = 'range_on_X', 2, 2, 0.01, 0.1, 0.01, 60, 60
 gap_len_min, gap_len_max, gap_len_step, y_size, x_size, distance_between_gat, base_triangle, distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating = 0.1,1,0.1,4.5,15,15,5.5,9,40,0.2,0.58,5,100
+aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2 = 0.9,1.4,1.4,1.1,1.5,1.3,0.8,1.1,0.01,1.2,1
 
 feature_check = ''
 
@@ -107,6 +108,20 @@ if select_mode == 'Eight Shape':
     raggio_iniziale = 0.01
     raggio_finale = 0.02
     step_size = 0.01
+    st.latex(r'''Y = \sqrt{A1^{2}\left( \left\lvert \frac{\sin{x}}{C1}\right\rvert^{D1} + G1 \right)^{2} \left(1 - \left(\frac{x}{B1}\right)^{2} \right)  }''')
+    aa1= float(st.text_input('A1',0.9))
+    bb1= float(st.text_input('B1',1.4))
+    cc1= float(st.text_input('C1',1.4))
+    gg1= float(st.text_input('G1',1.1))
+    dd1= float(st.text_input('D1',1.5))
+
+    st.latex(r'''Y = \sqrt{A2^{2}\left( \left\lvert \frac{\sin{x}}{C2}\right\rvert^{D2} + \frac{G2}{M2} \right)^{2} \left(1 - \left(\frac{x}{B2}\right)^{2} \right)  }''')
+    aa2= float(st.text_input('A2',1.3))
+    bb2= float(st.text_input('B2',0.8))
+    cc2= float(st.text_input('C2',1.1))
+    gg2= float(st.text_input('G2',0.01))
+    dd2= float(st.text_input('D2',1.2))
+    mm2= float(st.text_input('M2',1))
 
 if select_mode == 'Waveguide':
     feature_check = 'waveguide'
@@ -136,7 +151,8 @@ if st.button('Create'):
                             step_dose, dose_base, width, vertici, rotazione, altezza, base, lato_cost, text_label, bowtie_pitch_x, bowtie_pitch_y,
                             pitch_choice_text, dose_marker, starting_high, ending_high, high_step, angle, angle2, elips_start_r, elips_stop_r,
                             elips_sep, elips_rotatio, elips_vertex, gap_len_min, gap_len_max, gap_len_step, y_size, x_size, distance_between_gat,
-                            base_triangle, distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating, feature_check, marker_type)
+                            base_triangle, distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating, feature_check, marker_type,
+                            aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2)
 
     pgf().preview_generator(sample, num_elements_x, num_elements_y, raggio_iniziale, raggio_finale, step_size, distanza_tra_cerchi, dimArr, distanza_dosi_x,
                             distanza_dosi_y, layer, step_dose, dose_base, width, vertici, rotazione, altezza, base, lato_cost, text_label, bowtie_pitch_x,
