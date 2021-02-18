@@ -179,8 +179,7 @@ class pattern:
         #  ███ ███  ██   ██   ████   ███████  ██████   ██████  ██ ██████  ███████
 
 
-    def waveguide(self, x, y, dose, layer, lato_x, lato_y, gap):
-        H = 0.06
+    def waveguide(self, x, y, dose, layer, lato_x, lato_y, gap, H):
         gap = gap + lato_x
         dose = dose*100
         testoi = ['' for i in range(22)]
@@ -260,8 +259,7 @@ class pattern:
         # ██   ██ ██   ██ ██   ██     ██   ██ ██ ██  ██  ██ ██      ██   ██      ██
         # ██████  ██   ██ ██   ██     ██████  ██ ██      ██ ███████ ██   ██ ███████
 
-    def bar_dimer(self, x, y, dose, layer, lato_y, gap):
-        H = 0.06
+    def bar_dimer(self, x, y, dose, layer, lato_y, gap, H):
         dose = dose*100
         testoi = ['' for i in range(14)]
         testoi[0] = '1 ' + str(dose) + ' ' + str(layer)

@@ -10,7 +10,7 @@ class pattern_generator_files:
                           elips_stop_r, elips_sep, elips_rotatio, elips_vertex, gap_len_min, gap_len_max, gap_len_step, y_size,
                           x_size, distance_between_gat, base_triangle, distance_grating, deg_grating, size_grating, pitch_grating,
                           number_of_grating, vertici_grating, feature_check, marker_type,
-                          aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2):
+                          aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2, H, X_min, X_max, Y_min, Y_max, X_step, Y_step, X, Y):
 
         if feature_check == 'circle':
             namefile = 'AAA_cirlce_' + sample + '.asc'
@@ -30,6 +30,11 @@ class pattern_generator_files:
             namefile_elips = 'AAA_elips_' + sample + '.asc'
         if feature_check == 'waveguide':
             namefile_wave = 'AAA_wave_' + sample + '.asc'
+        if feature_check == 'waveguide_T':
+            namefile_waveT = 'AAA_waveT_' + sample + '.asc'
+        if feature_check == 'Waveguide_T_dose_matrix':
+            namefile_waveT_dose = 'AAA_waveT_' + sample + '.asc'
+
 
         namefile_marker = 'AAA_marker_' + sample + '.asc'
         namefile_testo = 'AAA_text_' + sample + '.asc'
@@ -71,11 +76,11 @@ class pattern_generator_files:
         y = np.zeros(num_elements_y)
 
 
-        # ██████  ██ ███████ ████████  █████  ███    ██  ██████ ███████     ██████  ███████ ████████ ██     ██ ███████ ███████ ███    ██     ████████ ██     ██  ██████      ██████  ██ ███████ ███████ ███████ ██████  ███████ ███    ██ ████████     ██████   ██████  ███████ ███████ ███████
-        # ██   ██ ██ ██         ██    ██   ██ ████   ██ ██      ██          ██   ██ ██         ██    ██     ██ ██      ██      ████   ██        ██    ██     ██ ██    ██     ██   ██ ██ ██      ██      ██      ██   ██ ██      ████   ██    ██        ██   ██ ██    ██ ██      ██      ██
-        # ██   ██ ██ ███████    ██    ███████ ██ ██  ██ ██      █████       ██████  █████      ██    ██  █  ██ █████   █████   ██ ██  ██        ██    ██  █  ██ ██    ██     ██   ██ ██ █████   █████   █████   ██████  █████   ██ ██  ██    ██        ██   ██ ██    ██ ███████ █████   ███████
-        # ██   ██ ██      ██    ██    ██   ██ ██  ██ ██ ██      ██          ██   ██ ██         ██    ██ ███ ██ ██      ██      ██  ██ ██        ██    ██ ███ ██ ██    ██     ██   ██ ██ ██      ██      ██      ██   ██ ██      ██  ██ ██    ██        ██   ██ ██    ██      ██ ██           ██
-        # ██████  ██ ███████    ██    ██   ██ ██   ████  ██████ ███████     ██████  ███████    ██     ███ ███  ███████ ███████ ██   ████        ██     ███ ███   ██████      ██████  ██ ██      ██      ███████ ██   ██ ███████ ██   ████    ██        ██████   ██████  ███████ ███████ ███████
+# ██████  ██ ███████ ████████  █████  ███    ██  ██████ ███████     ██████  ███████ ████████ ██     ██ ███████ ███████ ███    ██     ████████ ██     ██  ██████      ██████  ██ ███████ ███████ ███████ ██████  ███████ ███    ██ ████████     ██████   ██████  ███████ ███████ ███████
+# ██   ██ ██ ██         ██    ██   ██ ████   ██ ██      ██          ██   ██ ██         ██    ██     ██ ██      ██      ████   ██        ██    ██     ██ ██    ██     ██   ██ ██ ██      ██      ██      ██   ██ ██      ████   ██    ██        ██   ██ ██    ██ ██      ██      ██
+# ██   ██ ██ ███████    ██    ███████ ██ ██  ██ ██      █████       ██████  █████      ██    ██  █  ██ █████   █████   ██ ██  ██        ██    ██  █  ██ ██    ██     ██   ██ ██ █████   █████   █████   ██████  █████   ██ ██  ██    ██        ██   ██ ██    ██ ███████ █████   ███████
+# ██   ██ ██      ██    ██    ██   ██ ██  ██ ██ ██      ██          ██   ██ ██         ██    ██ ███ ██ ██      ██      ██  ██ ██        ██    ██ ███ ██ ██    ██     ██   ██ ██ ██      ██      ██      ██   ██ ██      ██  ██ ██    ██        ██   ██ ██    ██      ██ ██           ██
+# ██████  ██ ███████    ██    ██   ██ ██   ████  ██████ ███████     ██████  ███████    ██     ███ ███  ███████ ███████ ██   ████        ██     ███ ███   ██████      ██████  ██ ██      ██      ███████ ██   ██ ███████ ██   ████    ██        ██████   ██████  ███████ ███████ ███████
 
         # distance between the elements with the same size
         pitch_x = (distanza_tra_cerchi)*(num_raggio) + distanza_dosi_x
@@ -106,6 +111,7 @@ class pattern_generator_files:
         sandro = []
         triangolo = []
         rettangolo = []
+        Waveguide_T_dose_matrix = []
         cerchio = []
         farfalle = []
         farfalle_2 = []
@@ -145,6 +151,9 @@ class pattern_generator_files:
                     if feature_check == 'bowtie':
                         # create the bowtie array
                         farfalle.append(pattern().bowtai(x[i] + k*distanza_tra_cerchi, y[j], dose[dose_i], layer, raggio[k], altezza, base))
+                    if feature_check == 'Waveguide_T_dose_matrix':
+                        # create the Waveguide_T_dose_matrix array
+                        Waveguide_T_dose_matrix.append(pattern().waveguide(x[i] + k*distanza_tra_cerchi, y[j], dose[dose_i], layer, X, Y, raggio[k], H))
 
                     # create the markers array
                     if marker_type == 'Cross':
@@ -173,6 +182,39 @@ class pattern_generator_files:
                                               distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating))
 
                     dose_i = dose_i + 1
+
+
+# ██     ██  █████  ██    ██ ███████  ██████  ██    ██ ██ ██████  ███████     ██
+# ██     ██ ██   ██ ██    ██ ██      ██       ██    ██ ██ ██   ██ ██          ██
+# ██  █  ██ ███████ ██    ██ █████   ██   ███ ██    ██ ██ ██   ██ █████       ██
+# ██ ███ ██ ██   ██  ██  ██  ██      ██    ██ ██    ██ ██ ██   ██ ██          ██
+#  ███ ███  ██   ██   ████   ███████  ██████   ██████  ██ ██████  ███████     ██
+
+        if feature_check == 'waveguide T':
+            lato_y = [i for i in np.linspace(Y_min, Y_max, round((Y_max-Y_min)/Y_step)+1)]
+            lato_x = [i for i in np.linspace(X_min, X_max, round((X_max-X_min)/X_step)+1)]
+            # gap = [i for i in np.linspace(0.05, 0.12, round((0.12-0.05)/0.01)+1)]
+            position = [i for i in np.linspace(0, 65, len(raggio))]
+
+            waveT = []
+            dimer = []
+            tappo = []
+            testo2 = []
+            for k in range(len(lato_x)):
+                for j in range(len(lato_y)):
+                    if j == 0:
+                        salto = 0
+                    else:
+                        salto = 26*j
+                    for i in range(len(position)):
+                        waveT.append(pattern().waveguide(100*k, position[i]+(position[-1]+position[1])*(j)+salto, dose=dose_marker, layer=layer, lato_x=lato_x[k], lato_y=lato_y[j], gap=raggio[i], H = H))
+                        dimer.append(pattern().bar_dimer(100*k, position[i]+(position[-1]+position[1])*(j)+salto, dose=dose_marker, layer=layer, lato_y=lato_y[j], gap=raggio[i], H = H))
+                        tappo.append(pattern().rettangolo(100*k+lato_x[k], position[i]+(position[-1]+position[1])*(j)+salto, dose = dose_marker, layer=layer+1, lato_x=raggio[i], lato_y=lato_y[j]))
+                        testo2.append(pattern().generatore_testo(-50+100*k, position[i]+(position[-1]+position[1])*(j)+3+salto, dose = dose_marker, layer=str(layer)+'2', testo ='X ' + str(round(lato_x[k],2))
+                                                                + ' Y ' + str(round(lato_y[j],2)) + ' G ' + str(round(raggio[i],2)) ))
+            waveT_tot = waveT + dimer + tappo
+
+
 
 # ███    ███ ██    ██ ██   ████████ ██     ██████  ██ ████████  ██████ ██   ██     ██████   ██████  ██     ██ ████████ ██ ███████
 # ████  ████ ██    ██ ██      ██    ██     ██   ██ ██    ██    ██      ██   ██     ██   ██ ██    ██ ██     ██    ██    ██ ██
@@ -340,6 +382,13 @@ class pattern_generator_files:
             return elips, namefile_elips, markers, testo_cerchi, testo_dosi, namefile_global, namefile_marker
         if feature_check == 'waveguide':
             return wave, namefile_wave, markers, testo_cerchi, testo_dosi, namefile_global, namefile_marker
+        if feature_check == 'waveguide T':
+            return waveT_tot, namefile_waveT, testo2, markers, testo_dosi, namefile_global, namefile_marker
+        if feature_check == 'Waveguide_T_dose_matrix':
+            return Waveguide_T_dose_matrix, namefile_waveT_dose, markers, testo_cerchi, testo_dosi, namefile_global, namefile_marker
+
+
+
 
         # ██████  ██████   █████  ██     ██     ██████  ██████  ███████ ██    ██ ██ ███████ ██     ██
         # ██   ██ ██   ██ ██   ██ ██     ██     ██   ██ ██   ██ ██      ██    ██ ██ ██      ██     ██

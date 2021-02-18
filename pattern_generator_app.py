@@ -42,44 +42,39 @@ if st.checkbox('Legend'):
     st.write('---')
 
 
-select_mode = st.selectbox('Mode', ['','Circle', 'Rectangle', 'Bowtie', 'Point', 'Elips', 'Bowtie multi-pitch', 'Triangle', 'Eight Shape', 'Waveguide'])
+select_mode = st.selectbox('Mode', ['','Circle', 'Rectangle', 'Bowtie', 'Point', 'Elips', 'Bowtie multi-pitch', 'Triangle', 'Eight Shape', 'Waveguide', 'Waveguide T', 'Waveguide T dose matrix'])
 
-circle_check, bowtie_check, rectangle_check, point_check, bowtie_check_2, triangle_check, sandro_check, elips_check, waveguide_check = False, False, False, False, False, False, False, False, False
 width, vertici, rotazione, lato_cost, altezza, base, elips_start_r, elips_rotatio, elips_vertex, elips_stop_r, elips_sep = 0, 100, 0, 0.1, 0.01, 0.03, 0.01, 0, 100, 0.1, 0.01
 pitch_choice_text, bowtie_pitch_x, bowtie_pitch_y, starting_high, ending_high, high_step, angle, angle2 = 'range_on_X', 2, 2, 0.01, 0.1, 0.01, 60, 60
 gap_len_min, gap_len_max, gap_len_step, y_size, x_size, distance_between_gat, base_triangle, distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating = 0.1,1,0.1,4.5,15,15,5.5,9,40,0.2,0.58,5,100
 aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2 = 0.9,1.4,1.4,1.1,1.5,1.3,0.8,1.1,0.01,1.2,1
+H, X_min, X_max, Y_min, Y_max, X_step, Y_step, X, Y = 0.06, 0.1, 0.2, 1, 5, 0.01, 0.25, 0.1, 1
 
 feature_check = ''
 
 if select_mode == 'Circle':
     feature_check = 'circle'
-    circle_check = True
     width = float(st.text_input('Inner Radius (um)',0))
     vertici = int(st.text_input('Num Vertex',100))
     rotazione = float(st.text_input('Rotation',0))
 
 if select_mode == 'Rectangle':
     feature_check = 'rectangle'
-    rectangle_check = True
     lato_cost = float(st.text_input('Constant edge length (um)',0.1))
 
 if select_mode == 'Bowtie':
     feature_check = 'bowtie'
-    bowtie_check = True
     altezza = float(st.text_input('High (um)',0.01))
     base = float(st.text_input('Base (um)',0.03))
 
 if select_mode == 'Point':
     feature_check = 'point'
-    point_check = True
     raggio_iniziale = 0.01
     raggio_finale = 0.02
     step_size = 0.01
 
 if select_mode == 'Elips':
     feature_check = 'elips'
-    elips_check = True
     elips_start_r = float(st.text_input('Radius2 (um)',0.01))
     elips_rotatio = float(st.text_input('Rotation (deg)',0))
     elips_vertex = int(st.text_input('Num Vertex',100))
@@ -88,7 +83,6 @@ if select_mode == 'Elips':
 
 if select_mode == 'Bowtie multi-pitch':
     feature_check = 'bowtie_multi'
-    bowtie_check_2 = True
     pitch_choice_text = st.selectbox('Type of pitch', ['range_on_X','range_on_Y', 'range_on_XY'])
     bowtie_pitch_x = float(st.text_input('Pitch X (um)',2))
     bowtie_pitch_y = float(st.text_input('Pitch Y (um)',2))
@@ -99,12 +93,10 @@ if select_mode == 'Bowtie multi-pitch':
 
 if select_mode == 'Triangle':
     feature_check = 'triangle'
-    triangle_check = True
     angle2 = float(st.text_input('Angle (deg)',60))
 
 if select_mode == 'Eight Shape':
     feature_check = 'sandro'
-    sandro_check = True
     raggio_iniziale = 0.01
     raggio_finale = 0.02
     step_size = 0.01
@@ -125,7 +117,6 @@ if select_mode == 'Eight Shape':
 
 if select_mode == 'Waveguide':
     feature_check = 'waveguide'
-    waveguide_check = True
 
     image_waveguide = Image.open('grating_image.jpg')
     st.image(image_waveguide, use_column_width=True)
@@ -144,6 +135,34 @@ if select_mode == 'Waveguide':
     number_of_grating = int(st.text_input('number of gratings', 5))
     vertici_grating = int(st.text_input('Num Vertex',100))
 
+if select_mode == 'Waveguide T':
+    feature_check = 'waveguide_T'
+
+    image_waveguide = Image.open('waveT.jpg')
+    st.image(image_waveguide, use_column_width=True)
+
+    H = float(st.text_input('H size (um)', 0.06))
+    X_min = float(st.text_input('X size min (um)', 0.1))
+    X_max = float(st.text_input('X size max (um)', 0.2))
+    X_step = float(st.text_input('X size step (um)', 0.01))
+    Y_min = float(st.text_input('Y size min (um)', 1))
+    Y_max = float(st.text_input('Y size max (um)', 5))
+    Y_step = float(st.text_input('Y size step (um)', 0.25))
+
+    st.write('this design use the dose from the **Dose marker**, which means it does not create a dose matrix')
+    st.write('the design preview does not represent the real design for this one')
+    st.write('the file **AAA_markers_and_labels** is useless')
+    st.write('the file **AAA_marker** holds the labels instead')
+
+if select_mode == 'Waveguide T dose matrix':
+    feature_check = 'Waveguide_T_dose_matrix'
+
+    image_waveguide = Image.open('waveT.jpg')
+    st.image(image_waveguide, use_column_width=True)
+
+    H = float(st.text_input('H size (um)', 0.06))
+    X = float(st.text_input('X size (um)', 0.1))
+    Y = float(st.text_input('Y size (um)', 1))
 
 if st.button('Create'):
     pattern, name_pattern, markers, testo_cerchi, testo_dosi, name_markers, namefile_marker = pgf().lettura_variabili(sample, num_elements_x, num_elements_y,
@@ -152,7 +171,7 @@ if st.button('Create'):
                             pitch_choice_text, dose_marker, starting_high, ending_high, high_step, angle, angle2, elips_start_r, elips_stop_r,
                             elips_sep, elips_rotatio, elips_vertex, gap_len_min, gap_len_max, gap_len_step, y_size, x_size, distance_between_gat,
                             base_triangle, distance_grating, deg_grating, size_grating, pitch_grating, number_of_grating, vertici_grating, feature_check, marker_type,
-                            aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2)
+                            aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2, H, X_min, X_max, Y_min, Y_max, X_step, Y_step, X, Y)
 
     pgf().preview_generator(sample, num_elements_x, num_elements_y, raggio_iniziale, raggio_finale, step_size, distanza_tra_cerchi, dimArr, distanza_dosi_x,
                             distanza_dosi_y, layer, step_dose, dose_base, width, vertici, rotazione, altezza, base, lato_cost, text_label, bowtie_pitch_x,
