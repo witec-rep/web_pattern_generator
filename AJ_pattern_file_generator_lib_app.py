@@ -12,6 +12,7 @@ class pattern_generator_files:
                           number_of_grating, vertici_grating, feature_check, marker_type,
                           aa1,bb1,cc1,gg1,dd1, aa2,bb2,cc2,gg2,dd2,mm2, H, X_min, X_max, Y_min, Y_max, X_step, Y_step, X, Y):
 
+
         if feature_check == 'circle':
             namefile = 'AAA_cirlce_' + sample + '.asc'
         if feature_check == 'bowtie':
@@ -190,7 +191,8 @@ class pattern_generator_files:
 # ██ ███ ██ ██   ██  ██  ██  ██      ██    ██ ██    ██ ██ ██   ██ ██          ██
 #  ███ ███  ██   ██   ████   ███████  ██████   ██████  ██ ██████  ███████     ██
 
-        if feature_check == 'waveguide T':
+
+        if feature_check == 'waveguide_T':
             lato_y = [i for i in np.linspace(Y_min, Y_max, round((Y_max-Y_min)/Y_step)+1)]
             lato_x = [i for i in np.linspace(X_min, X_max, round((X_max-X_min)/X_step)+1)]
             # gap = [i for i in np.linspace(0.05, 0.12, round((0.12-0.05)/0.01)+1)]
@@ -213,7 +215,6 @@ class pattern_generator_files:
                         testo2.append(pattern().generatore_testo(-50+100*k, position[i]+(position[-1]+position[1])*(j)+3+salto, dose = dose_marker, layer=str(layer)+'2', testo ='X ' + str(round(lato_x[k],2))
                                                                 + ' Y ' + str(round(lato_y[j],2)) + ' G ' + str(round(raggio[i],2)) ))
             waveT_tot = waveT + dimer + tappo
-
 
 
 # ███    ███ ██    ██ ██   ████████ ██     ██████  ██ ████████  ██████ ██   ██     ██████   ██████  ██     ██ ████████ ██ ███████
@@ -382,7 +383,7 @@ class pattern_generator_files:
             return elips, namefile_elips, markers, testo_cerchi, testo_dosi, namefile_global, namefile_marker
         if feature_check == 'waveguide':
             return wave, namefile_wave, markers, testo_cerchi, testo_dosi, namefile_global, namefile_marker
-        if feature_check == 'waveguide T':
+        if feature_check == 'waveguide_T':
             return waveT_tot, namefile_waveT, testo2, markers, testo_dosi, namefile_global, namefile_marker
         if feature_check == 'Waveguide_T_dose_matrix':
             return Waveguide_T_dose_matrix, namefile_waveT_dose, markers, testo_cerchi, testo_dosi, namefile_global, namefile_marker
