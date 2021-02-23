@@ -195,7 +195,6 @@ class pattern_generator_files:
         if feature_check == 'waveguide_T':
             lato_y = [i for i in np.linspace(Y_min, Y_max, round((Y_max-Y_min)/Y_step)+1)]
             lato_x = [i for i in np.linspace(X_min, X_max, round((X_max-X_min)/X_step)+1)]
-            # gap = [i for i in np.linspace(0.05, 0.12, round((0.12-0.05)/0.01)+1)]
             position = [i for i in np.linspace(0, 65, len(raggio))]
 
             waveT = []
@@ -210,11 +209,21 @@ class pattern_generator_files:
                         salto = 26*j
                     for i in range(len(position)):
                         waveT.append(pattern().waveguide(100*k, position[i]+(position[-1]+position[1])*(j)+salto, dose=dose_marker, layer=layer, lato_x=lato_x[k], lato_y=lato_y[j], gap=raggio[i], H = H))
-                        dimer.append(pattern().bar_dimer(100*k, position[i]+(position[-1]+position[1])*(j)+salto, dose=dose_marker, layer=layer, lato_y=lato_y[j], gap=raggio[i], H = H))
+                        dimer.append(pattern().bar_dimer(100*k + lato_x[k]*2 + 5, position[i]+(position[-1]+position[1])*(j)+salto, dose=dose_marker, layer=layer, lato_y=lato_y[j], gap=raggio[i], H = H))
                         tappo.append(pattern().rettangolo(100*k+lato_x[k], position[i]+(position[-1]+position[1])*(j)+salto, dose = dose_marker, layer=layer+1, lato_x=raggio[i], lato_y=lato_y[j]))
                         testo2.append(pattern().generatore_testo(-50+100*k, position[i]+(position[-1]+position[1])*(j)+3+salto, dose = dose_marker, layer=str(layer)+'2', testo ='X ' + str(round(lato_x[k],2))
                                                                 + ' Y ' + str(round(lato_y[j],2)) + ' G ' + str(round(raggio[i],2)) ))
-            waveT_tot = waveT + dimer + tappo
+            waveT_tot = []
+            waveT = np.array(waveT).reshape(-1,1)
+            dimer = np.array(dimer).reshape(-1,1)
+            tappo = np.array(tappo).reshape(-1,1)
+
+            for i in waveT:
+                waveT_tot.append(i)
+            for i in dimer:
+                waveT_tot.append(i)
+            for i in tappo:
+                waveT_tot.append(i)
 
 
 # ███    ███ ██    ██ ██   ████████ ██     ██████  ██ ████████  ██████ ██   ██     ██████   ██████  ██     ██ ████████ ██ ███████
